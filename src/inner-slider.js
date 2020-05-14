@@ -449,8 +449,10 @@ export class InnerSlider extends React.Component {
       listRef: this.list,
       slideIndex: this.state.currentSlide
     });
+
     if (!state) return;
     if (state["swiping"]) {
+      this.disableBodyScroll();
       this.clickable = false;
     }
     this.setState(state);
@@ -463,15 +465,14 @@ export class InnerSlider extends React.Component {
       listRef: this.list,
       slideIndex: this.state.currentSlide
     });
+    this.enableBodyScroll();
     if (!state) return;
     let triggerSlideHandler = state["triggerSlideHandler"];
     delete state["triggerSlideHandler"];
+    this.enableBodyScroll();
     this.setState(state);
     if (triggerSlideHandler === undefined) return;
     this.slideHandler(triggerSlideHandler);
-    if (this.props.verticalSwiping) {
-      this.enableBodyScroll();
-    }
   };
   slickPrev = () => {
     // this and fellow methods are wrapped in setTimeout

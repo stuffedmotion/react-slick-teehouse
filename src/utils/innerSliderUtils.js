@@ -126,7 +126,11 @@ export const initializedState = spec => {
     currentSlide = slideCount - 1 - spec.initialSlide;
   }
   let lazyLoadedList = spec.lazyLoadedList || [];
-  let slidesToLoad = getOnDemandLazySlides({ ...spec, currentSlide, lazyLoadedList });
+  let slidesToLoad = getOnDemandLazySlides({
+    ...spec,
+    currentSlide,
+    lazyLoadedList
+  });
   lazyLoadedList.concat(slidesToLoad);
 
   let state = {
@@ -362,6 +366,7 @@ export const swipeMove = (e, spec) => {
 
   let dotCount = Math.ceil(slideCount / slidesToScroll);
   let swipeDirection = getSwipeDirection(spec.touchObject, verticalSwiping);
+
   let touchSwipeLength = touchObject.swipeLength;
   if (!infinite) {
     if (
